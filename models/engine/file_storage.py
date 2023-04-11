@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+import os
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -64,6 +65,26 @@ class FileStorage:
             key = obj.__class__.__name__ + '.' + obj.id
             if key in self.__objects:
                 del self.__objects[key]
+
+    def get(self, cls, id):
+        file_path = os.path.join(self.folder_path, cls.__name__, f"{id}.json")
+        if not os.path.exists(file_path):
+            return None
+        with open(file_path, "r") as f:
+            data = json.load(f)
+        return cls(**data)
+
+    def count(self, cls=None):
+        if cls is None:
+            count = 0
+            for dirpath, _, filenames in os.walk(self.folder_path):
+                count += len(filenames)
+            return count
+        else:
+            folder_path = os.path.join(self.folder_path, cls.__name__)
+            if not os.path.exists(folder_path):
+                return 0
+            return len(os.listdir(folder_path))
 
     def close(self):
         """call reload() method for deserializing the JSON file to objects"""
