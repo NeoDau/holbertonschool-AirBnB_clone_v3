@@ -67,24 +67,26 @@ class FileStorage:
                 del self.__objects[key]
 
     def get(self, cls, id):
-        file_path = os.path.join(self.folder_path, cls.__name__, f"{id}.json")
-        if not os.path.exists(file_path):
+        """ return object the class and id. Not fund None"""
+        objec = slef.all()
+        if cls is None or id is None:
             return None
-        with open(file_path, "r") as f:
-            data = json.load(f)
-        return cls(**data)
+        else:
+            for key, value in objec.items():
+                if objec[key].id == id:
+                    return value
+            return None
 
     def count(self, cls=None):
+        """ Return the number of objects in storage """
+        objec = self.all()
+        count = 0
         if cls is None:
-            count = 0
-            for dirpath, _, filenames in os.walk(self.folder_path):
-                count += len(filenames)
+            for key, value in object.items():
+                count += 1
             return count
         else:
-            folder_path = os.path.join(self.folder_path, cls.__name__)
-            if not os.path.exists(folder_path):
-                return 0
-            return len(os.listdir(folder_path))
+            return len(self.all(cls))
 
     def close(self):
         """call reload() method for deserializing the JSON file to objects"""
