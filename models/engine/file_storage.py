@@ -67,7 +67,7 @@ class FileStorage:
                 del self.__objects[key]
 
     def get(self, cls, id):
-        """ return object the class and id. Not fund None"""
+        """ return object the class and id. Not fund None """
         objec = slef.all()
         if cls is None or id is None:
             return None
