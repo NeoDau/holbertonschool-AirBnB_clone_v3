@@ -88,7 +88,7 @@ class DBStorage:
         return None
 
     def count(self, cls=None):
-
+        """ return number od object storage"""
         objec = self.all()
         count = 0
 
