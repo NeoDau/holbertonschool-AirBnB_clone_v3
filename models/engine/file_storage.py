@@ -67,7 +67,7 @@ class FileStorage:
 
     def get(self, cls, id):
         """ return object the class and id. Not fund None """
-        objec = slef.all()
+        objec = self.all()
         if cls is None or id is None:
             return None
         else:
