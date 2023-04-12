@@ -1,5 +1,6 @@
 #!/usr/bin/python3 
 """comments"""
+
 from flask import jsonify
 from models import storage
 from api.v1.views import app_views
