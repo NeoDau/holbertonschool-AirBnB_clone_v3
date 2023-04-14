@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """comments"""
 
-
 import os
 from flask import Flask, jsonify
 from api.v1.views import app_views
