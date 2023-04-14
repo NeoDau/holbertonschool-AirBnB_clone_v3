@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """comments"""
 
+
 import os
 from flask import Flask, jsonify
 from api.v1.views import app_views
@@ -19,6 +20,7 @@ def close_storage(exception):
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Not found"}), 404
+
 
 if __name__ == '__main__':
     host = os.environ.get('HBNB_API_HOST', '0.0.0.0')
